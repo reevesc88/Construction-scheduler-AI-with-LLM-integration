@@ -1,0 +1,60 @@
+version: "3.8"
+
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+    container_name: construction-ai-backend
+    command: uvicorn src.main:app --host 0.0.0.0 --port 8000
+    environment:
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - LLM_PROVIDER=${LLM_PROVIDER:-openai}
+      - OPENAI_MODEL=${OPENAI_MODEL:-gpt-4o}
+      - LOG_LEVEL=${LOG_LEVEL:-INFO}
+      - PYTHONUNBUFFERED=1
+    volumes:
+      - ./backend/src:/app/src
+      - ./backend/chroma_data:/app/chroma_data
+      - ./artifacts:/app/artifacts
+    ports:
+      - "${API_PORT:-8000}:8000"
+    depends_on:
+      - chroma
+    networks:
+      - ai-net
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  chroma:
+    image: chromadb/chroma:latest
+    container_name: construction-ai-vectordb
+    ports:
+      - "8001:8000"
+    volumes:
+      - ./backend/chroma_data:/chroma
+    networks:
+      - ai-net
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: construction-ai-frontend
+    environment:
+      - API_URL=http://backend:8000
+      - STREAMLIT_SERVER_ADDRESS=0.0.0.0
+      - STREAMLIT_SERVER_PORT=8501
+    ports:
+      - "${FRONTEND_PORT:-8501}:8501"
+    depends_on:
+      - backend
+    networks:
+      - ai-net
+
+networks:
+  ai-net:
+    driver: bridge

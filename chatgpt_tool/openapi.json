@@ -1,0 +1,295 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Construction AI Planner API",
+    "description": "AI-powered construction project planning system. Upload specifications and generate detailed execution plans with scheduling, cost analysis, and risk assessment.",
+    "version": "1.0.0",
+    "contact": {
+      "name": "Support",
+      "url": "https://github.com/yourusername/construction-ai-planner"
+    }
+  },
+  "servers": [
+    {
+      "url": "https://api.construction-ai.example.com",
+      "description": "Production server (update with your ngrok URL or deployment URL)"
+    }
+  ],
+  "paths": {
+    "/health": {
+      "get": {
+        "operationId": "health_check",
+        "summary": "Health Check",
+        "description": "Verify the API is running",
+        "tags": ["System"],
+        "responses": {
+          "200": {
+            "description": "API is operational",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "ok"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/ingest/document": {
+      "post": {
+        "operationId": "ingest_construction_document",
+        "summary": "Ingest Construction Specification",
+        "description": "Upload a PDF construction specification document. The system will extract text, tables, and images to understand project requirements.",
+        "tags": ["Document Ingestion"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "file": {
+                    "type": "string",
+                    "format": "binary",
+                    "description": "PDF file containing construction specifications"
+                  }
+                },
+                "required": ["file"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Document successfully ingested and indexed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "success"
+                    },
+                    "document_id": {
+                      "type": "string",
+                      "example": "doc_abc123",
+                      "description": "Unique identifier for the ingested document"
+                    },
+                    "filename": {
+                      "type": "string",
+                      "example": "warehouse_spec.pdf"
+                    },
+                    "chunks_indexed": {
+                      "type": "integer",
+                      "example": 24,
+                      "description": "Number of text chunks extracted and indexed"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid file format or empty document"
+          },
+          "500": {
+            "description": "Server error during processing"
+          }
+        }
+      }
+    },
+    "/generate/plan": {
+      "post": {
+        "operationId": "generate_project_plan",
+        "summary": "Generate Complete Execution Plan",
+        "description": "Generate a comprehensive project execution plan with schedule analysis (CPM), cost estimation, and risk assessment based on previously ingested documents.",
+        "tags": ["Plan Generation"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "project_id": {
+                    "type": "string",
+                    "description": "Unique project identifier",
+                    "example": "WH-2025-01"
+                  },
+                  "location": {
+                    "type": "string",
+                    "description": "Project location (for weather and permitting risk assessment)",
+                    "example": "Seattle, WA"
+                  },
+                  "notes": {
+                    "type": "string",
+                    "description": "Additional constraints or special considerations",
+                    "example": "Prioritize concrete curing time. Weather-sensitive work."
+                  }
+                },
+                "required": ["project_id"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Plan successfully generated",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "success"
+                    },
+                    "plan": {
+                      "type": "object",
+                      "description": "Complete project plan",
+                      "properties": {
+                        "project_id": {
+                          "type": "string"
+                        },
+                        "tasks": {
+                          "type": "array",
+                          "description": "List of project tasks with scheduling and cost data",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "id": {
+                                "type": "string",
+                                "example": "T-001"
+                              },
+                              "description": {
+                                "type": "string",
+                                "example": "Pour 200 cy of concrete"
+                              },
+                              "phase": {
+                                "type": "string",
+                                "example": "Foundation",
+                                "enum": ["Site Preparation", "Foundation", "Structural Framing", "Enclosure", "MEP", "Finishes"]
+                              },
+                              "duration_days": {
+                                "type": "integer",
+                                "example": 10
+                              },
+                              "labor_cost": {
+                                "type": "number",
+                                "format": "float",
+                                "example": 5000.00
+                              },
+                              "material_cost": {
+                                "type": "number",
+                                "format": "float",
+                                "example": 30000.00
+                              },
+                              "total_cost": {
+                                "type": "number",
+                                "format": "float",
+                                "example": 35000.00
+                              },
+                              "dependencies": {
+                                "type": "array",
+                                "description": "Task IDs that must complete before this task",
+                                "items": {
+                                  "type": "string"
+                                },
+                                "example": ["T-001"]
+                              }
+                            }
+                          }
+                        },
+                        "risks": {
+                          "type": "array",
+                          "description": "Identified project risks with mitigation strategies",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "risk_type": {
+                                "type": "string",
+                                "enum": ["Weather", "Permitting", "Supply Chain", "Labor", "Other"],
+                                "example": "Weather"
+                              },
+                              "probability": {
+                                "type": "string",
+                                "enum": ["Low", "Medium", "High"],
+                                "example": "High"
+                              },
+                              "mitigation_strategy": {
+                                "type": "string",
+                                "example": "Schedule concrete work during dry season. Maintain weather monitoring."
+                              }
+                            }
+                          }
+                        },
+                        "total_estimated_cost": {
+                          "type": "number",
+                          "format": "float",
+                          "description": "Sum of all task costs",
+                          "example": 450000.00
+                        },
+                        "total_duration_days": {
+                          "type": "integer",
+                          "description": "Total project duration based on critical path",
+                          "example": 120
+                        },
+                        "critical_path": {
+                          "type": "array",
+                          "description": "Task IDs on the critical path",
+                          "items": {
+                            "type": "string"
+                          },
+                          "example": ["T-001", "T-002", "T-005"]
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid project parameters"
+          },
+          "500": {
+            "description": "Error generating plan"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Task": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "string" },
+          "description": { "type": "string" },
+          "phase": { "type": "string" },
+          "duration_days": { "type": "integer" },
+          "labor_cost": { "type": "number" },
+          "material_cost": { "type": "number" },
+          "total_cost": { "type": "number" },
+          "dependencies": { "type": "array", "items": { "type": "string" } }
+        }
+      },
+      "Risk": {
+        "type": "object",
+        "properties": {
+          "risk_type": { "type": "string" },
+          "probability": { "type": "string" },
+          "mitigation_strategy": { "type": "string" }
+        }
+      }
+    }
+  }
+}
