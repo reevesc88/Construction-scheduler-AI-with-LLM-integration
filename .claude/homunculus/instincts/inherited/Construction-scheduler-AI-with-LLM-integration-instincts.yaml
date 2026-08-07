@@ -1,0 +1,320 @@
+# Instincts generated from https://github.com/reevesc88/Construction-scheduler-AI-with-LLM-integration
+# Generated: 2026-07-08T13:53:40.362Z
+# Version: 2.0
+# NOTE: This file supplements (does not replace) any existing curated instincts.
+# High-confidence manually curated instincts should be preserved alongside these.
+
+---
+id: Construction-scheduler-AI-with-LLM-integration-commit-conventional
+trigger: "when writing a commit message"
+confidence: 0.85
+domain: git
+source: repo-analysis
+source_repo: https://github.com/reevesc88/Construction-scheduler-AI-with-LLM-integration
+---
+
+# Construction Scheduler AI With LLM Integration Commit Conventional
+
+## Action
+
+Use conventional commit format with prefixes: feat, fix
+
+## Evidence
+
+- 2 commits analyzed
+- Detected conventional commit pattern
+- Examples: feat: wire CodeRabbit + Copilot review bots (v3), fix: add top-level permissions:{} to workflows (security hardening)
+
+---
+id: Construction-scheduler-AI-with-LLM-integration-commit-length
+trigger: "when writing a commit message"
+confidence: 0.6
+domain: git
+source: repo-analysis
+source_repo: https://github.com/reevesc88/Construction-scheduler-AI-with-LLM-integration
+---
+
+# Construction Scheduler AI With LLM Integration Commit Length
+
+## Action
+
+Write moderate-length commit messages (~58 characters)
+
+## Evidence
+
+- Average commit message length: 58 chars
+- Based on 2 commits
+
+---
+id: Construction-scheduler-AI-with-LLM-integration-naming-files
+trigger: "when creating a new file"
+confidence: 0.8
+domain: code-style
+source: repo-analysis
+source_repo: https://github.com/reevesc88/Construction-scheduler-AI-with-LLM-integration
+---
+
+# Construction Scheduler AI With LLM Integration Naming Files
+
+## Action
+
+Use kebab-case naming convention
+
+## Evidence
+
+- Analyzed file naming patterns in repository
+- Dominant pattern: kebab-case
+
+---
+id: Construction-scheduler-AI-with-LLM-integration-import-relative
+trigger: "when importing modules"
+confidence: 0.75
+domain: code-style
+source: repo-analysis
+source_repo: https://github.com/reevesc88/Construction-scheduler-AI-with-LLM-integration
+---
+
+# Construction Scheduler AI With LLM Integration Import Relative
+
+## Action
+
+Use relative imports for project files
+
+## Evidence
+
+- Import analysis shows relative import pattern
+- Example: import { x } from '../lib/x'
+
+---
+id: Construction-scheduler-AI-with-LLM-integration-export-style
+trigger: "when exporting from a module"
+confidence: 0.7
+domain: code-style
+source: repo-analysis
+source_repo: https://github.com/reevesc88/Construction-scheduler-AI-with-LLM-integration
+---
+
+# Construction Scheduler AI With LLM Integration Export Style
+
+## Action
+
+Prefer named exports
+
+## Evidence
+
+- Export pattern analysis
+- Dominant style: named
+
+---
+id: Construction-scheduler-AI-with-LLM-integration-test-separate
+trigger: "when writing tests"
+confidence: 0.8
+domain: testing
+source: repo-analysis
+source_repo: https://github.com/reevesc88/Construction-scheduler-AI-with-LLM-integration
+---
+
+# Construction Scheduler AI With LLM Integration Test Separate
+
+## Action
+
+Place tests in the tests/ or __tests__/ directory, mirroring src structure
+
+## Evidence
+
+- Separate test directory pattern detected
+- Tests live in dedicated test folders
+
+---
+id: construction-scheduler-ai-with-llm-integration-instinct-file-naming
+trigger: "When creating a new file in the repository"
+confidence: 0.9
+domain: code-style
+source: repo-analysis
+source_repo: reevesc88/Construction-scheduler-AI-with-LLM-integration
+---
+
+# Construction Scheduler Ai With Llm Integration Instinct File Naming
+
+## Action
+
+Name the file using kebab-case (e.g., my-file.ts)
+
+## Evidence
+
+- Pattern in namingConventions.files: kebab-case
+
+---
+id: construction-scheduler-ai-with-llm-integration-instinct-function-naming
+trigger: "When defining a new function"
+confidence: 0.9
+domain: code-style
+source: repo-analysis
+source_repo: reevesc88/Construction-scheduler-AI-with-LLM-integration
+---
+
+# Construction Scheduler Ai With Llm Integration Instinct Function Naming
+
+## Action
+
+Use camelCase for the function name
+
+## Evidence
+
+- Pattern in namingConventions.functions: camelCase
+
+---
+id: construction-scheduler-ai-with-llm-integration-instinct-class-naming
+trigger: "When defining a new class"
+confidence: 0.9
+domain: code-style
+source: repo-analysis
+source_repo: reevesc88/Construction-scheduler-AI-with-LLM-integration
+---
+
+# Construction Scheduler Ai With Llm Integration Instinct Class Naming
+
+## Action
+
+Use PascalCase for the class name
+
+## Evidence
+
+- Pattern in namingConventions.classes: PascalCase
+
+---
+id: construction-scheduler-ai-with-llm-integration-instinct-constant-naming
+trigger: "When declaring a constant"
+confidence: 0.9
+domain: code-style
+source: repo-analysis
+source_repo: reevesc88/Construction-scheduler-AI-with-LLM-integration
+---
+
+# Construction Scheduler Ai With Llm Integration Instinct Constant Naming
+
+## Action
+
+Use SCREAMING_SNAKE_CASE for the constant name
+
+## Evidence
+
+- Pattern in namingConventions.constants: SCREAMING_SNAKE_CASE
+
+---
+id: construction-scheduler-ai-with-llm-integration-instinct-import-style
+trigger: "When importing modules within the codebase"
+confidence: 0.8
+domain: code-style
+source: repo-analysis
+source_repo: reevesc88/Construction-scheduler-AI-with-LLM-integration
+---
+
+# Construction Scheduler Ai With Llm Integration Instinct Import Style
+
+## Action
+
+Use relative import paths
+
+## Evidence
+
+- Pattern in importStyle: relative
+
+---
+id: construction-scheduler-ai-with-llm-integration-instinct-export-style
+trigger: "When exporting functions, classes, or constants"
+confidence: 0.8
+domain: code-style
+source: repo-analysis
+source_repo: reevesc88/Construction-scheduler-AI-with-LLM-integration
+---
+
+# Construction Scheduler Ai With Llm Integration Instinct Export Style
+
+## Action
+
+Use named exports
+
+## Evidence
+
+- Pattern in exportStyle: named
+
+---
+id: construction-scheduler-ai-with-llm-integration-instinct-test-location
+trigger: "When adding or organizing test files"
+confidence: 0.8
+domain: testing
+source: repo-analysis
+source_repo: reevesc88/Construction-scheduler-AI-with-LLM-integration
+---
+
+# Construction Scheduler Ai With Llm Integration Instinct Test Location
+
+## Action
+
+Place tests in a separate directory from source code
+
+## Evidence
+
+- Pattern in architecture.testLocation: separate
+
+---
+id: construction-scheduler-ai-with-llm-integration-instinct-git-commit-format
+trigger: "When writing a commit message"
+confidence: 0.9
+domain: git
+source: repo-analysis
+source_repo: reevesc88/Construction-scheduler-AI-with-LLM-integration
+---
+
+# Construction Scheduler Ai With Llm Integration Instinct Git Commit Format
+
+## Action
+
+Use the conventional commit format with 'feat' or 'fix' prefixes, followed by a colon and a concise description
+
+## Evidence
+
+- Pattern in commits.type: conventional
+- Pattern in commits.prefixes: ["feat", "fix"]
+- Seen in commit: 'feat: wire CodeRabbit + Copilot review bots (v3)'
+- Seen in commit: 'fix: add top-level permissions:{} to workflows (security hardening)'
+
+---
+id: construction-scheduler-ai-with-llm-integration-instinct-github-workflow-coderabbit
+trigger: "When configuring automated code review workflows"
+confidence: 0.8
+domain: workflow
+source: repo-analysis
+source_repo: reevesc88/Construction-scheduler-AI-with-LLM-integration
+---
+
+# Construction Scheduler Ai With Llm Integration Instinct Github Workflow Coderabbit
+
+## Action
+
+Include a workflow file named '.github/workflows/coderabbit-trigger.yml' for CodeRabbit integration
+
+## Evidence
+
+- .github/workflows/coderabbit-trigger.yml present in configFiles
+
+---
+id: construction-scheduler-ai-with-llm-integration-instinct-github-workflow-copilot
+trigger: "When configuring automated code review workflows"
+confidence: 0.8
+domain: workflow
+source: repo-analysis
+source_repo: reevesc88/Construction-scheduler-AI-with-LLM-integration
+---
+
+# Construction Scheduler Ai With Llm Integration Instinct Github Workflow Copilot
+
+## Action
+
+Include a workflow file named '.github/workflows/copilot-review.yml' for Copilot integration
+
+## Evidence
+
+- .github/workflows/copilot-review.yml present in configFiles
+
