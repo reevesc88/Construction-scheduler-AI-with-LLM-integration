@@ -2,7 +2,7 @@
 fastapi==0.104.1
 uvicorn==0.24.0
 python-multipart==0.0.27
-pydantic==2.5.0
+pydantic==2.9.2
 python-dotenv==1.2.2
 
 # LLM
@@ -30,7 +30,7 @@ tqdm==4.66.3
 tenacity==8.2.3
 
 # Frontend
-streamlit==1.37.0
+streamlit==1.51.0
 plotly==5.18.0
 
 # PDF Generation
